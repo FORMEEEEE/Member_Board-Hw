@@ -23,26 +23,4 @@ public class BoardService {
 		return boardList;
 	}
 
-	public Board selectBoard(int boardNo) throws Exception{
-		
-		Connection conn = getConnection();
-		
-		Board board = dao.selectBoard(conn, boardNo);
-		
-		close(conn);
-		
-		return board;
-	}
-
-	public List<Integer> commentCount() {
-		
-		Connection conn = getConnection();
-		
-		List<Integer> commentCountList = dao.commentCount(conn);
-		
-		close(conn);
-		
-		return commentCountList;
-	}
-
 }

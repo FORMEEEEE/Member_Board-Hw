@@ -89,21 +89,22 @@ public class MemberView{
 	
 	private void selectAll(Member loginMember) throws Exception{
 		
-		System.out.println("<<회원 목록 조회>>");
+		System.out.println("<회원 목록 조회>");
 		
 		List<Member> memberList = service.selectAll();
 		
 		if(memberList.isEmpty()) {
-			System.out.println("조회된 사원 정보가 없습니다.");
+			System.out.println("조회된 회원 없음");
 		} else {
 			System.out.println("------------------------");
 			System.out.println("아이디 |  이름  | 성별 |");
 			System.out.println("------------------------");
 			for(Member member : memberList) { 
-				System.out.printf("%s | %s |  %s   |\n",
+				System.out.printf("%s | %s |  %s  |\n",
 						member.getMemberId(),
 						member.getMemberName(), 
-						member.getMemberGender());
+						member.getMemberGender()
+						);
 			}
 		}
 		
@@ -111,7 +112,7 @@ public class MemberView{
 	
 	private void updateMember(Member loginMember) throws Exception{
 		
-		System.out.println("<<내 정보 수정>>");
+		System.out.println("<내 정보 수정>");
 		
 		int result = 0;
 		String memberId = loginMember.getMemberId();
@@ -124,49 +125,49 @@ public class MemberView{
 			
 			System.out.println();
 			if(memberGender.equals("M") || memberGender.equals("F")) {
-				System.out.print("정말 수정하시겠습니까?(Y/N)");
+				System.out.print("수정할거야?(Y/N)");
 				String input = sc.next().toUpperCase();
 				if(input.equals("Y")) {
 					result = service.updateMember(memberName, memberGender, memberId);
 					break;
 				} else {
-					System.out.println("취소되었습니다.");
+					System.out.println("취소");
 					return;
 				}
 				
 			} else {
-				System.out.println("[M 또는 F만 입력하세요!]");
+				System.out.println("M/F 만 입력");
 			}
 			System.out.println();
 			
 		}
 		
 		if(result > 0) {
-			System.out.println("회원 정보가 수정되었습니다");
+			System.out.println("수정됨");
 		} else {
-			System.out.println("회원 정보가 수정되지 않았습니다");
+			System.out.println("수정되지 않음");
 		}
 		
 		
 	}
 	
 	private void updatePw(Member loginMember) throws Exception{
-		System.out.println("<<비밀번호 변경>>");
+		System.out.println("<비밀번호 변경>");
 		
 		int result = 0;
 		
 		String memberId = loginMember.getMemberId();
 	
-		// 로그인 멤버의 비밀번호 불러오기
+	
 		String memberPw = service.findPw(memberId);
 		
 
-		while(true) {
+		while(true) { //될때까지 계속 반복할거임
 			System.out.print("현재 비밀번호 : ");
 			String checkPw = sc.next();
 			
 			if(!checkPw.equals(memberPw)) {
-				System.out.println("비밀번호가 일치하지 않습니다.");
+				System.out.println("비밀번호 불일치");
 			} else {
 			
 				System.out.print("새 비밀번호 : ");
@@ -176,50 +177,50 @@ public class MemberView{
 				String memberPw2 = sc.next();
 				
 				if(memberPw1.equals(memberPw2)) {
-					System.out.print("정말 수정하시겠습니까?(Y/N) : ");
+					System.out.print("정말 수정할거야?(Y/N) : ");
 					String input = sc.next().toUpperCase();
 					if(input.equals("Y")) {
 						result = service.updatePw(memberId, memberPw1);
 						break;
 						
 					} else {
-						System.out.println("취소되었습니다");
+						System.out.println("취소");
 						return;
 					}
 				} else {
-					System.out.println("새 비밀번호가 일치하지 않습니다.");
+					System.out.println("비밀번호가 틀림");
 				}
 						
 			}	
 		}if(result > 0) {
-			System.out.println("비밀번호가 수정되었습니다");
+			System.out.println("수정됨");
 		} else {
-			System.out.println("비밀번호가 수정되지않았습니다");
+			System.out.println("수정되지 않음");
 		}
 				
 	}
 	
 	private void secession(Member loginMember) throws Exception{
-		System.out.println("<<회원 탈퇴>>");
+		System.out.println("<회원 탈퇴>");
 		
 		int result = 0;
 		String memberId = loginMember.getMemberId();
 		
-		System.out.print("정말 탈퇴하시겠습니까? (Y/N) : ");
+		System.out.print("정말 탈퇴할거야? (Y/N) : ");
 		String input = sc.next().toUpperCase();
 		
 		if(input.equals("Y")) {
 			result = service.secession(memberId);
 		} else {
-			System.out.println("회원 탈퇴를 취소하였습니다.");
+			System.out.println("취소");
 		}
 		if(result > 0) {
-			System.out.println("회원 탈퇴를 완료하였습니다");
+			System.out.println("탈퇴 완료");
 			loginMember = null;
 			
 			
 		} else {
-			System.out.println("회원 탈퇴에 실패하였습니다");
+			System.out.println("탈퇴 실패");
 		}
 		
 	}

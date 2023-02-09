@@ -51,11 +51,8 @@ public class BoardDAO {
 				String createDate = rs.getString("CREATE_DT");
 				int readCount = rs.getInt("READ_COUNT");
 				
-				Board board = new Board(boardNo, 
-						boardTitle, memberName, createDate, readCount);
+			
 				
-				boardList.add(board);
-
 				
 			}
 		} finally {
@@ -69,55 +66,15 @@ public class BoardDAO {
 
 
 	public Board selectBoard(Connection conn, int boardNo) throws Exception{
+		return null;
 		
-		Board board = null;
-		
-		try {
-			String sql = prop.getProperty("selectBoard");
-			
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, boardNo);
-			
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				board = new Board(boardNo, rs.getString("BOARD_TITLE"),
-						rs.getString("BOARD_CONTENT"), rs.getString("MEMBER_NM"),
-						rs.getString("CREATE_DT"), rs.getInt("READ_COUNT"));
-			}
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		
-		return board;
 	}
 
 
 
 	public List<Integer> commentCount(Connection conn) throws Exception{
+		return null;
 		
-		List<Integer> commentCountList = new ArrayList<>();
-		
-		try {
-			
-			String sql = prop.getProperty("commentCount");
-			
-			stmt = conn.createStatement();
-			
-			rs = stmt.executeQuery(sql);
-			
-			while(rs.next()) {
-				int commentCount = rs.getInt("COUNT");
-				commentCountList.add(commentCount);
-			}
-			
-		} finally {
-			close(rs);
-			close(stmt);
-		}
-		
-		return commentCountList;
 	}
 
 }

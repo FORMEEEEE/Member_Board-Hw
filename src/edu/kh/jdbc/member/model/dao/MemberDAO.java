@@ -144,7 +144,7 @@ public class MemberDAO {
 		
 	}
 
-	public int updatePw(Connection conn, String memberId, String memberPw1) throws Exception{
+	public int updatePw(Connection conn, String memberId, String memberPw1 ) throws Exception{
 		
 		int result = 0;
 		

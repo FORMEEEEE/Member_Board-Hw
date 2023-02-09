@@ -50,7 +50,7 @@ public class MemberService {
 			}
 		} catch(SQLException e) {
 			rollback(conn);
-			throw new Exception("DAO 수행 중 예외 발생");
+			System.out.println("예외발생");
 		} finally {
 			close(conn);
 		}
